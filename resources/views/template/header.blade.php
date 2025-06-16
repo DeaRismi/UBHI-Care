@@ -53,6 +53,39 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+    <style>
+    /* Hilangkan garis vertikal dan sisakan garis horizontal */
+    #dtTable th,
+    #dtTable td {
+        border-left: none !important;
+        border-right: none !important;
+        border-top: none !important; /* opsional, jika hanya ingin garis bawah */
+        border-bottom: 1px solid #dee2e6; /* Bootstrap's default border color */
+    }
+
+    /* Opsional: hilangkan garis atas header */
+    #dtTable thead th {
+        border-top: none !important;
+    }
+
+    /* Tambahkan agar table terlihat rapi tanpa garis vertikal */
+    #dtTable {
+        border-collapse: collapse;
+    }
+
+    .btn-input-hasil {
+        background-color: #f0ad4e; /* Warna oranye */
+        color: white;
+        border: none;
+    }
+
+    .btn-input-hasil:hover {
+        background-color: #ec971f;
+        color: white;
+    }
+</style>
+
+
 </head>
 
 <body>

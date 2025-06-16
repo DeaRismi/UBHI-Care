@@ -35,7 +35,7 @@
     <label class="card-title mb-3" style="font-size: 20px">Hasil Konseling</label>
 
     <div class="row mb-3">
-    <div class="col-md-6">
+    <div class="col-12">
         <input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan NRP atau Nama Mahasiswa">
     </div>
 </div>
@@ -44,8 +44,8 @@
 
                 
                 
-            <div class="m-t-25">
-                <table class="table mb-0" id="dtTable">
+    <div class="table-responsive">
+    <table class="table table-bordered w-100" id="dtTable">
                     <thead>
                         <tr>
                             <th>NRP</th>
@@ -69,12 +69,13 @@
                             <td> 
                                 @if($item->STATUS_PENGAJUAN=='Mengajukan')
                             
-                            <button type="button"
-                                class="btn btn-subtle-danger waves-effect waves-light"
-                                data-json='<?= htmlspecialchars(json_encode($item), ENT_QUOTES, 'UTF-8') ?>'
-                                onclick="openInputHasil(this)">
-                                Input Hasil
-                            </button>
+                                <button type="button"
+    class="btn btn-input-hasil waves-effect waves-light"
+    data-json='<?= htmlspecialchars(json_encode($item), ENT_QUOTES, 'UTF-8') ?>'
+    onclick="openInputHasil(this)">
+    Input Hasil
+</button>
+
                             @endif
                                     <!-- Tombol Riwayat Hasil: warna biru -->
 <button type="button"
