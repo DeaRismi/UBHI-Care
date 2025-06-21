@@ -23,9 +23,10 @@ $data['hasil_konseling'] = DB::select("
     LEFT JOIN keluhan k ON p.ID_PENGAJUAN = k.ID_PENGAJUAN
     JOIN mahasiswa m ON p.NRP = m.NRP
     LEFT JOIN konseling ks ON ks.ID_PENGAJUAN = p.ID_PENGAJUAN
+    WHERE k.ID_PENGAJUAN IS NOT NULL AND ks.ID_PENGAJUAN IS NOT NULL
 ");
 
-       
+
         return view('template.header',$data).
             view('template.sidebar', $data).
             view('hasil_konseling', $data).
@@ -38,17 +39,17 @@ $data['hasil_konseling'] = DB::select("
             ->leftJoin('users', 'staf.EMAIL_STAF', '=', 'users.email')
             ->where('users.id', session('users')[0]['id'])
             ->value('ID_STAF');
-    
+
         // Cek apakah sudah ada data konseling untuk ID_PENGAJUAN tersebut
         $existing = DB::table('konseling')->where('ID_PENGAJUAN', $id_pengajuan)->first();
-    
+
         // Ambil JADWAL dan TANGGAL dari pengajuan
         $pengajuan = DB::table('pengajuan')->where('ID_PENGAJUAN', $id_pengajuan)->first();
-    
+
         if (!$pengajuan) {
             return back()->with('error', 'Pengajuan tidak ditemukan.');
         }
-    
+
         $data = [
             'ID_PENGAJUAN' => $id_pengajuan,
             'ID_STAF' => $id_staf,
@@ -58,7 +59,7 @@ $data['hasil_konseling'] = DB::select("
             'STATUS_KONSELING' => 'Selesai',
             'TANGGAL_KONSELING' => $pengajuan->TANGGAL_KOSONG
         ];
-    
+
         if ($existing) {
             // Update data konseling yang sudah ada
             DB::table('konseling')->where('ID_PENGAJUAN', $id_pengajuan)->update($data);
@@ -67,15 +68,15 @@ $data['hasil_konseling'] = DB::select("
             $data['ID_KONSELING'] = $this->GenerateUniqID($id_pengajuan);
             DB::table('konseling')->insert($data);
         }
-    
+
         // Update status pengajuan ke "Selesai"
         DB::table('pengajuan')->where('ID_PENGAJUAN', $id_pengajuan)->update([
             'STATUS_PENGAJUAN' => 'Selesai'
         ]);
-    
+
         return redirect('hasil_konseling')->with('succ_msg', 'Data berhasil disimpan.');
     }
-    
+
 
     public function gethasil(Request $request){
         $hasil = DB::table('konseling')
@@ -88,7 +89,7 @@ $data['hasil_konseling'] = DB::select("
     } else {
         return response()->json(['data' => null], 404);
     }
-        
+
     }
     public function GenerateUniqID($var)
     {
@@ -100,17 +101,28 @@ $data['hasil_konseling'] = DB::select("
         return "HK_" . $uniqid . substr(md5(time()), 0, 3);
     }
 
-    public function lihatriwayat(Request $request){
-        $id_mahasiswa = $request-> input('id_mahasiswa');
-        $riwayat = DB::select("
+ public function lihatriwayat(Request $request){
+    $id_mahasiswa = $request->input('id_mahasiswa');
+    $data['title'] = 'riwayat';
+
+    $data['riwayat'] = DB::select("
         SELECT *
-FROM pengajuan
-LEFT JOIN keluhan ON keluhan.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN
-LEFT JOIN konseling ON konseling.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN
-LEFT JOIN mahasiswa.NRP = pengajuan.NRP
-WHERE pengajuan.NRP = '". $id_mahasiswa."'
-        ");
-        dd($riwayat);
-    }
+        FROM pengajuan
+        LEFT JOIN keluhan ON keluhan.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN
+        LEFT JOIN konseling ON konseling.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN
+        LEFT JOIN mahasiswa ON mahasiswa.NRP = pengajuan.NRP
+        WHERE pengajuan.NRP = ?
+          AND (keluhan.ID_PENGAJUAN IS NOT NULL AND konseling.ID_PENGAJUAN IS NOT NULL)
+    ", [$id_mahasiswa]);
+
+$data['nama'] =  $data['riwayat'][0]-> NAMA_MAHASISWA;
+
+     return view('template.header',$data).
+            view('template.sidebar', $data).
+            view('riwayat', $data).
+            view('template.footer');
+}
+
+
 }
 

@@ -32,14 +32,12 @@
     <?php } ?>
     <div class="card">
         <div class="card-body">
-            <label class="card-title mb-3" style="font-size: 20px">Hasil Konseling</label>
-
-            <div class="row mb-3">
+            <label class="card-title mb-3" style="font-size: 20px">Riwayat Hasil Konseling {{ $nama }}</label>
+<div class="row mb-3">
                 <div class="col-12">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan NRP atau Nama Mahasiswa">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan Keluhan">
                 </div>
             </div>
-
             <div class="row">
 
 
@@ -55,14 +53,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($hasil_konseling as $item)
+                            @foreach ($riwayat as $item)
                             <tr>
-                                <td> {{$item->NRP}}</td>
-                                <td> {{$item->NAMA_MAHASISWA}}</td>
+
+
                                 <td> {{$item->TANGGAL_KOSONG}}</td>
                                 <td> {{$item->WAKTU_KOSONG}}</td>
-                                <td> {{$item->STATUS_PENGAJUAN}}</td>
-                                
+                                <td> {{$item->DESKRIPSI_KELUHAN}}</td>
+                                 <td> {{$item->HASIL_KONSELING}}</td>
+
                             </tr>
 
                             @endforeach

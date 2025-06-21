@@ -78,12 +78,14 @@
 
                                     @endif
                                     <!-- Tombol Riwayat Hasil: warna biru -->
-                                    <button type="button"
-                                        class="btn btn-info waves-effect waves-light">
-                                        Riwayat Hasil
-                                        <input type="hidden" name="id_mahasiwa" id="id_mahasiswa" value="{{ $item->NRP }}">
-                                    </button>
+                                     <form  action="{{ url('riwayat') }}" method="POST" enctype="multipart/form-data">
 
+                 @csrf
+    <input type="hidden" name="id_mahasiswa" id="id_mahasiswa" value="{{ $item->NRP }}">
+    <button type="submit" class="btn btn-info waves-effect waves-light">
+        Riwayat Hasil
+    </button>
+                                     </form>
                                     <!-- Tombol Hasil: warna hijau -->
                                     <button type="button"
                                         data-json='<?= htmlspecialchars(json_encode($item), ENT_QUOTES, 'UTF-8') ?>'

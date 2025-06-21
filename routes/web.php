@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HasilKonselingController;
 use App\Http\Controllers\JadwalKosongController;
 use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\SaranPemanggilanController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['usersession:1,2,3'])->group(function () {
@@ -13,6 +14,9 @@ Route::middleware(['usersession:1,2,3'])->group(function () {
 
 Route::middleware(['usersession:2,3'])->group(function () {
     Route::get('hasil_konseling', [HasilKonselingController::class, 'index']);
+    Route::get('hasil_konseling/gethasil', [HasilKonselingController::class, 'gethasil']);
+    Route::get('saran_pemanggilan', [SaranPemanggilanController::class, 'index']);
+
 });
 
 Route::middleware(['usersession:1'])->group(function () {
@@ -33,7 +37,7 @@ Route::middleware(['usersession:2'])->group(function () {
 
 
 Route::middleware(['usersession:3'])->group(function () {
-
+    Route::post('saran_pemanggilan/saran', [SaranPemanggilanController::class, 'saran']);
 });
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
