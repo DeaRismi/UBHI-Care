@@ -26,6 +26,7 @@ Route::middleware(['usersession:2'])->group(function () {
     Route::post('hasil_konseling/insert', [HasilKonselingController::class, 'inputhasil']);
     Route::get('jadwal_kosong', [JadwalKosongController::class, 'index']);
     Route::post('jadwal_kosong/insert', [JadwalKosongController::class, 'insert']);
+    Route::post('riwayat', [HasilKonselingController::class, 'lihatriwayat']);
 
 });
 

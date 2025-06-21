@@ -26,8 +26,6 @@ $data['hasil_konseling'] = DB::select("
 ");
 
        
-
-
         return view('template.header',$data).
             view('template.sidebar', $data).
             view('hasil_konseling', $data).
@@ -101,4 +99,18 @@ $data['hasil_konseling'] = DB::select("
         $uniqid = strtoupper($begin);
         return "HK_" . $uniqid . substr(md5(time()), 0, 3);
     }
+
+    public function lihatriwayat(Request $request){
+        $id_mahasiswa = $request-> input('id_mahasiswa');
+        $riwayat = DB::select("
+        SELECT *
+FROM pengajuan
+LEFT JOIN keluhan ON keluhan.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN
+LEFT JOIN konseling ON konseling.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN
+LEFT JOIN mahasiswa.NRP = pengajuan.NRP
+WHERE pengajuan.NRP = '". $id_mahasiswa."'
+        ");
+        dd($riwayat);
+    }
 }
+

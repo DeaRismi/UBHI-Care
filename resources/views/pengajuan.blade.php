@@ -36,7 +36,7 @@
                 <div class="col-md-6 align-self-center">
                     <label class="card-title" style="font-size: 20px">Jadwal Kosong</label>
                 </div>
-                
+            
             </div>
             <div class="m-t-25">
                 <table class="table mb-0" id="dtTable">
@@ -86,16 +86,16 @@
                    
                     <div class="form-group mb-3">
                         <label> Nama <span class="text-danger">*</span></label>
-                        <input placeholder="Nama" type="text" name="nama" class="form-control" required>
+                        <input placeholder="Nama" type="text" name="nama" class="form-control" disabled>
                     </div>
                     <div class="form-group mb-3">
                         <label>NRP <span class="text-danger">*</span></label>
-                        <input placeholder="NRP" type="number" name="nrp" class="form-control" required>
+                        <input placeholder="NRP" type="number" name="nrp" class="form-control" readonly>
                     </div>
                  
                     <div class="form-group mb-3">
                         <label>Program Studi<span class="text-danger">*</span></label>
-                        <input placeholder="Program Studi" type="text" name="prodi" class="form-control" required>
+                        <input placeholder="Program Studi" type="text" name="prodi" class="form-control" disabled>
                     </div>
 
                     <div class="form-group mb-3">
@@ -112,7 +112,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Ajukan</button>
                 </div>
             </form>
         </div>

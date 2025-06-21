@@ -48,14 +48,10 @@
                     <table class="table table-bordered w-100" id="dtTable">
                         <thead>
                             <tr>
-                                <th>NRP</th>
-                                <th>Nama</th>
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
-                                <th>Status</th>
-
-                                <th>
-                                    Action</th>
+                                <th>Keluhan</th>
+                                <th>Hasil</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,33 +62,7 @@
                                 <td> {{$item->TANGGAL_KOSONG}}</td>
                                 <td> {{$item->WAKTU_KOSONG}}</td>
                                 <td> {{$item->STATUS_PENGAJUAN}}</td>
-                                <td>
-                                    @if($item->STATUS_PENGAJUAN=='Mengajukan')
-
-                                    <button type="button"
-                                        class="btn btn-input-hasil waves-effect waves-light"
-                                        data-json='<?= htmlspecialchars(json_encode($item), ENT_QUOTES, 'UTF-8') ?>'
-                                        onclick="openInputHasil(this)">
-                                        Input Hasil
-                                    </button>
-
-                                    @endif
-                                    <!-- Tombol Riwayat Hasil: warna biru -->
-                                    <button type="button"
-                                        class="btn btn-info waves-effect waves-light">
-                                        Riwayat Hasil
-                                        <input type="hidden" name="id_mahasiwa" id="id_mahasiswa" value="{{ $item->NRP }}">
-                                    </button>
-
-                                    <!-- Tombol Hasil: warna hijau -->
-                                    <button type="button"
-                                        data-json='<?= htmlspecialchars(json_encode($item), ENT_QUOTES, 'UTF-8') ?>'
-                                        onclick="openHasil(this)"
-                                        class="btn btn-success waves-effect waves-light">
-                                        Hasil
-                                    </button>
-
-                                </td>
+                                
                             </tr>
 
                             @endforeach
@@ -119,31 +89,24 @@
 
 
                         <div class="form-group mb-3">
-                            <label> Nama <span class="text-danger">*</span></label>
+                            <label> Tanggal <span class="text-danger">*</span></label>
                             <input placeholder="Nama" type="text" name="nama" class="form-control" disabled>
                         </div>
                         <div class="form-group mb-3">
-                            <label>NRP <span class="text-danger">*</span></label>
+                            <label> Waktu <span class="text-danger">*</span></label>
                             <input placeholder="NRP" type="number" name="nrp" class="form-control" disabled>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label>Program Studi<span class="text-danger">*</span></label>
+                            <label> Keluhan <span class="text-danger">*</span></label>
                             <input placeholder="Program Studi" type="text" name="prodi" class="form-control" disabled>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label>Keluhan <span class="text-danger">*</span></label>
+                            <label> Hasil <span class="text-danger">*</span></label>
                             <input placeholder="Keluhan" type="text" name="keluhan" class="form-control" disabled>
                         </div>
-                        <div class="form-group mb-3">
-                            <label>Hasil Konseling<span class="text-danger">*</span></label>
-                            <input placeholder="Keluhan" type="text" name="hasil_konseling" class="form-control" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label>Catatan Tambahan<span class="text-danger">*</span></label>
-                            <input placeholder="Keluhan" type="text" name="catatan_tambahan" class="form-control" required>
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <div class="modal-footer">

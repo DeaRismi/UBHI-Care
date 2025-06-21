@@ -40,7 +40,7 @@
                     <div class="mt-3 mt-md-0">
                         <button type="button" class="btn btn-primary" onclick="addModal()">
                             <i class="mdi mdi-plus me-1"></i>
-                            Add Jadwal</button>
+                            Tambahkan Jadwal</button>
                     </div>
                 </div>
             </div>
@@ -142,7 +142,8 @@
                  
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>

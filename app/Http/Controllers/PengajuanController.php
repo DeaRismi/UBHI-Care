@@ -65,13 +65,14 @@ class PengajuanController extends Controller
             'KATEGORI_KELUHAN'    => $request->input('kategori_keluhan'),
             'DESKRIPSI_KELUHAN'   => $request->input('keluhan')
         ];
-    
+
+        
         DB::table('pengajuan')->insert($data['pengajuan']);
         DB::table('keluhan')->insert($data['keluhan']);
         DB::table('jadwal_kosong')
         ->where('ID_JADWAL_KOSONG', $request->input('id_pengajuan'))
         ->update(['STATUS' => 1]);
-    
+        
         return redirect('pengajuan')->with('succ_msg','Successfully Add New Pengajuan');
     }
     
